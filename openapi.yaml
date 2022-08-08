@@ -1,0 +1,169 @@
+openapi: 3.0.3
+info:
+  title: Mimir API
+  version: 1.0.0
+  description: Backend specification for MAS SE Web Engineering 3 Project
+  contact:
+    email: tobias.buechel@ost.ch
+    name: Tobias Büchel
+servers:
+  - url: http:localhost:3003
+paths:
+  /cards:
+    get:
+      tags:
+        - Master Data
+      summary: List all cards
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Card'
+
+    post:
+      tags:
+        - Master Data
+      summary: Add a new card
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Card'
+        required: true
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Card'
+
+  /cards/{id}:
+    put:
+      tags:
+        - Master Data
+      summary: Update an existing card
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: id of the card
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Card'
+        required: true
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Card'
+
+  /game:
+    get:
+      tags:
+        - Game Loop
+      summary: Get current game
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Game'
+        '404':
+          description: not found
+
+    post:
+      tags:
+        - Game Loop
+      summary: Start a new game
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Game'
+        '409':
+          description: Conflict
+
+    patch:
+      tags:
+        - Game Loop
+      summary: Set answer for current card
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Answer'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Game'
+
+    delete:
+      tags:
+        - Game Loop
+      summary: Delete current game
+      responses:
+        '204':
+          description: successful operation
+
+components:
+  schemas:
+    Card:
+      type: object
+      properties:
+        id:
+          type: string
+        front:
+          type: string
+        back:
+          type: string
+
+    GameCard:
+      type: object
+      properties:
+        id:
+          type: string
+        front:
+          type: string
+        back:
+          type: string
+        answer:
+          type: string
+        accepted:
+          type: string
+
+    Game:
+      type: object
+      properties:
+        front:
+          type: string
+        cardCount:
+          type: number
+        solvedCards:
+          type: array
+          items:
+            $ref: '#/components/schemas/GameCard'
+
+    Answer:
+      type: object
+      properties:
+        answer:
+          type: string
