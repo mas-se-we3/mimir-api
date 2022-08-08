@@ -16,7 +16,7 @@ paths:
       summary: List all cards
       responses:
         '200':
-          description: successful operation
+          description: listing cards
           content:
             application/json:
               schema:
@@ -36,7 +36,7 @@ paths:
         required: true
       responses:
         '200':
-          description: successful operation
+          description: card added
           content:
             application/json:
               schema:
@@ -62,7 +62,7 @@ paths:
         required: true
       responses:
         '200':
-          description: successful operation
+          description: card updated
           content:
             application/json:
               schema:
@@ -83,7 +83,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/Game'
         '404':
-          description: not found
+          description: game not found
 
     post:
       tags:
@@ -91,13 +91,13 @@ paths:
       summary: Start a new game
       responses:
         '200':
-          description: successful operation
+          description: game started
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Game'
         '409':
-          description: Conflict
+          description: game already started
 
     patch:
       tags:
@@ -115,6 +115,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Game'
+        '400':
+          description: no cards left
+        '404':
+          description: game not found
 
     delete:
       tags:
@@ -122,7 +126,9 @@ paths:
       summary: Delete current game
       responses:
         '204':
-          description: successful operation
+          description: deleted
+        '404':
+          description: game not found
 
 components:
   schemas:

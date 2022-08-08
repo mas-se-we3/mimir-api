@@ -42,8 +42,9 @@ app.post('/api/game', (req, res) => {
 	}
 
 	let cards = get('cards')
-	const next = []
+
 	let current
+	const next = []
 	for (let n = 0; n < 3; n++) {
 		const index = Math.floor(Math.random() * cards.length)
 		const card = { ...cards[index], id: v4() }
@@ -61,6 +62,13 @@ app.post('/api/game', (req, res) => {
 })
 
 app.delete('/api/game', (req, res) => {
+	const game = get('game')
+
+	if (!game) {
+		res.sendStatus(404)
+		return
+	}
+
 	remove('game')
 	res.sendStatus(204)
 })
@@ -90,10 +98,7 @@ app.patch('/api/game', (req, res) => {
 		answer,
 		accepted: answer.toLowerCase() === game.current.back.toLowerCase()
 	})
-
-	if (game.next.length > 0) Object.assign(game.current, game.next.pop())
-	else delete game.current
-
+	game.current = game.next.pop()
 	set('game', game)
 
 	res.send(toGameDto(game))
