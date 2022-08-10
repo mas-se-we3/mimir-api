@@ -68,6 +68,27 @@ paths:
               schema:
                 $ref: '#/components/schemas/Card'
 
+    delete:
+      tags:
+        - Master Data
+      summary: Delete a card
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: id of the card
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Card'
+        required: true
+      responses:
+        '204':
+          description: card deleted
+
   /game:
     get:
       tags:
@@ -154,7 +175,7 @@ components:
         answer:
           type: string
         accepted:
-          type: string
+          type: boolean
 
     Game:
       type: object

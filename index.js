@@ -21,6 +21,11 @@ app.put('/api/cards/:id', (req, res) => {
 	res.send(update('cards', req.body, req.params.id))
 })
 
+app.delete('/api/cards/:id', (req, res) => {
+	remove('cards', req.params.id)
+	res.sendStatus(204)
+})
+
 // game loop
 app.get('/api/game', (req, res) => {
 	const game = get('game')

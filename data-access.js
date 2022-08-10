@@ -13,34 +13,26 @@ let data = {
 			back: 'Present'
 		},
 		{
-			id: 'd955bcc7-912a-4fd6-ac10-aab58b517659',
+			id: '8f537f7e-d6fc-4970-b8a7-6d94da9f8f46',
 			front: 'Zukunft',
 			back: 'Future'
+		},
+		{
+			id: '56633f27-dada-4070-84b7-6ba0e5e2fa8e',
+			front: 'Time',
+			back: 'Zeit'
+		},
+		{
+			id: '88c40e26-a10a-467a-8473-52f4689c80f3',
+			front: 'Hour',
+			back: 'Stunde'
+		},
+		{
+			id: '93c6c43f-e76c-483c-b02a-5aeebbc7c949',
+			front: 'Minute',
+			back: 'Minute'
 		}
 	]
-	// game: {
-	// 	solved: [
-	// 		{
-	// 			id: 'd955bcc7-912a-4fd6-ac10-aab58b517659',
-	// 			front: 'Gegenwart',
-	// 			back: 'Present',
-	// 			answer: 'Now',
-	// 			accepted: false
-	// 		}
-	// 	],
-	// 	current: {
-	// 		id: 'd955bcc7-912a-4fd6-ac10-aab58b517659',
-	// 		front: 'Gegenwart',
-	// 		back: 'Present'
-	// 	},
-	// 	next: [
-	// 		{
-	// 			id: 'd955bcc7-912a-4fd6-ac10-aab58b517659',
-	// 			front: 'Gegenwart',
-	// 			back: 'Present'
-	// 		}
-	// 	]
-	// }
 }
 
 function get(entity) {
@@ -64,7 +56,12 @@ function set(entity, row) {
 	return data[entity]
 }
 
-function remove(entity) {
+function remove(entity, id) {
+	if (id) {
+		data[entity] = data[entity].filter(e => e.id !== id)
+		return
+	}
+
 	delete data[entity]
 }
 
