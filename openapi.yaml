@@ -1,13 +1,13 @@
 openapi: 3.0.3
 info:
   title: Mimir API
-  version: 1.0.0
+  version: 1.0.1
   description: Backend specification for MAS SE Web Engineering 3 Project
   contact:
     email: tobias.buechel@ost.ch
     name: Tobias Büchel
 servers:
-  - url: http:localhost:3003
+  - url: http://localhost:3003/api
 paths:
   /cards:
     get:
@@ -100,9 +100,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Game'
+                $ref: '#/components/schemas/Game'
         '404':
           description: game not found
 
@@ -184,7 +182,7 @@ components:
           type: string
         cardCount:
           type: number
-        solvedCards:
+        solved:
           type: array
           items:
             $ref: '#/components/schemas/GameCard'
