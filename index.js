@@ -27,6 +27,12 @@ app.put('/api/cards/:id', (req, res) => {
 })
 
 app.delete('/api/cards/:id', (req, res) => {
+	const card = get('cards').find(card => card.id === req.params.id)
+	if(!card) {
+		res.sendStatus(404)
+		return
+	}
+
 	remove('cards', req.params.id)
 	res.sendStatus(204)
 })
