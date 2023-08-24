@@ -81,12 +81,6 @@ paths:
             type: integer
           required: true
           description: id of the card
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Card'
-        required: true
       responses:
         '204':
           description: card deleted
