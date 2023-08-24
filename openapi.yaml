@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Mimir API
-  version: 1.0.1
+  version: 1.0.2
   description: Backend specification for MAS SE Web Engineering 3 Project
   contact:
     email: tobias.buechel@ost.ch
@@ -79,12 +79,6 @@ paths:
             type: integer
           required: true
           description: id of the card
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Card'
-        required: true
       responses:
         '204':
           description: card deleted
