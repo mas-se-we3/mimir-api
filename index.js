@@ -18,6 +18,11 @@ app.post('/api/cards', (req, res) => {
 })
 
 app.put('/api/cards/:id', (req, res) => {
+	const card = get('cards').find(card => card.id === req.params.id)
+	if(!card) {
+		res.sendStatus(404)
+		return
+	}
 	res.send(update('cards', req.body, req.params.id))
 })
 

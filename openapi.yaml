@@ -32,7 +32,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Card'
+              $ref: '#/components/schemas/CardCreateUpdate'
         required: true
       responses:
         '200':
@@ -58,7 +58,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Card'
+              $ref: '#/components/schemas/CardCreateUpdate'
         required: true
       responses:
         '200':
@@ -67,6 +67,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Card'
+        '404':
+          description: card not found
 
     delete:
       tags:
@@ -88,6 +90,8 @@ paths:
       responses:
         '204':
           description: card deleted
+        '404':
+          description: card not found
 
   /game:
     get:
@@ -156,6 +160,14 @@ components:
       properties:
         id:
           type: string
+        front:
+          type: string
+        back:
+          type: string
+
+    CardCreateUpdate:
+      type: object
+      properties:
         front:
           type: string
         back:
